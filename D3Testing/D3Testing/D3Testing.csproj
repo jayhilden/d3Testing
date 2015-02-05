@@ -66,6 +66,8 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+    <Content Include="Hilden.js" />
+    <Content Include="main.css" />
     <Content Include="world-countries.json" />
   </ItemGroup>
   <ItemGroup>
