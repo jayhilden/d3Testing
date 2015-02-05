@@ -5,7 +5,7 @@
     <title>World Bank Global Development Sprint</title>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 </head>
-    <!-- https://dl-web.dropbox.com/spa/6x4vg7uwuzglgh3/wbgds/public/index.html -->
+    
 <body>
 
 <script charset="utf-8" src="//cdnjs.cloudflare.com/ajax/libs/d3/3.3.13/d3.min.js"></script>
@@ -1929,7 +1929,8 @@ var ONE_SECOND = 1000,
                 d.img = null;
             }
         })(d);
-        d.img.src = "https://dl-web.dropbox.com/spa/6x4vg7uwuzglgh3/wbgds/public/flags/" + d.key.toLowerCase() + '.png';
+        debugger;
+        d.img.src = "flags/" + d.key.toLowerCase() + '.png';
     }
 
     function coord(x, y) {
@@ -1964,8 +1965,7 @@ var ONE_SECOND = 1000,
             }
         });
         if (!countryByIndex[c.id]) {
-            var cc = wbc.getByIsoId(c.key)
-                ;
+            var cc = wbc.getByIsoId(c.key);
             if (!cc) {
                 cc = failCountryCoord[c.key];
                 if (!cc) {
@@ -2223,7 +2223,7 @@ var ONE_SECOND = 1000,
             btnPause.hide();
             btnStart.hide();
             imgPreloader.show();
-            d3.csv(/*"https://dl-web.dropbox.com/spa/6x4vg7uwuzglgh3/wbgds/public/" + */fy + '.csv', request);
+            d3.csv(fy + '.csv', request);
         })
     ;
 
@@ -2275,8 +2275,10 @@ var ONE_SECOND = 1000,
     d3.select("#fiscalYear")
         .on("change", function(d) {
             fy = +this.value;
+            /*
             if (document.location.href.indexOf('visualizing.org') > -1)
                 document.location = "https://dl-web.dropbox.com/spa/6x4vg7uwuzglgh3/wbgds/public/index.html#year=" + fy;
+            */
             btnReload.show();
         })
         .selectAll('option')

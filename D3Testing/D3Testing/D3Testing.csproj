@@ -57,8 +57,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="2013.csv" />
     <Content Include="2013.json" />
+    <Content Include="Hilden.csv" />
+    <Content Include="2013.csv" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
