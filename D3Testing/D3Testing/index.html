@@ -1896,7 +1896,7 @@ var ONE_SECOND = 1000,
 (function() {
     var w, h,
         _data,
-        fy = 2013,
+        fy = 'Hilden',
         div
     ;
 
@@ -1992,20 +1992,7 @@ var ONE_SECOND = 1000,
         return countryByIndex[c.id] = c;
     }
 
-    function initProcurement(d) {
-        return {
-            category : d['Procurement Category'],
-            method : d['Procurement Method'],
-            type : d['Procurement Type']
-        };
-    }
 
-    function initContract(d) {
-        return {
-            desc : d['Contract Description'],
-            date : Date.parse(d['Contract Signing Date'])
-        };
-    }
 
     function initProject(d) {
         return projects[d['Project ID']] || (projects[d['Project ID']] = {
@@ -2021,6 +2008,10 @@ var ONE_SECOND = 1000,
         return this.basevalue || 0;
     }
 
+    /*
+    d is a row of data from the csv file, pretty cool.
+    d.csv is similar to PHP's Explode method
+    */
     function initItem(d) {
         // Convert strings to numbers.
         d.value = d.basevalue = parseInt(d["Total Contract Amount (USD)"].substring(1));
@@ -2032,8 +2023,15 @@ var ONE_SECOND = 1000,
         d.supplier.supplied += d.value;
         d.sector = d["Major Sector"];
         d.product = d['Product line'];
-        d.procurement = initProcurement(d);
-        d.contract = initContract(d);
+        d.procurement = {
+            category: d['Procurement Category'],
+            method: d['Procurement Method'],
+            type: d['Procurement Type']
+        };
+        d.contract = {
+            desc: d['Contract Description'],
+            date: Date.parse(d['Contract Signing Date'])
+        };
         d.year = d['Fiscal Year'];
         d.project = initProject(d);
         d.id = d['WB Contract Number'] + d.project.id + d.supplier.key + d.borrower.key;
@@ -2041,6 +2039,15 @@ var ONE_SECOND = 1000,
         d.asdate = Date.parse(d['As of Date']);
 
         return d;
+    }
+
+    function initItemHilden(d) {
+        //debugger;
+        d.eventDate = Date.parse(d['Event Date']);
+        d.fromCoord = coord(d['From Latitude'], d['From Longitude']);
+        d.toCoord = coord(d['To Latitude'], d['To Longitude']);
+        d.movementDays = d['Duration Of Movement In Days'];
+        d.daysAtDestination = d['Days At Destination'];
     }
 
     function clone(d) {
@@ -2096,8 +2103,9 @@ var ONE_SECOND = 1000,
         countryByIndex = [];
         failCountryCoord = {length : 0};
         needPaintCapital = [];
-
-        data = data.map(initItem);
+        //debugger;
+        data = data.map(initItemHilden);
+        //data = data.map(initItem);
         l = data.length;
         sizes.domain(d3.extent(data));
 
@@ -2292,10 +2300,7 @@ var ONE_SECOND = 1000,
 
     imgPreloader.show();
 
-    d3.json(document.location.href.indexOf('visualizing.org') > -1
-        ? "/sites/default/files/sprint/data/world-countries.json"
-        : "world-countries.json", function (error, collection) {
-
+    d3.json("world-countries.json", function (error, collection) {
         feature = feature
             .data(collection.features)
             .enter().append("path")
@@ -2307,9 +2312,6 @@ var ONE_SECOND = 1000,
         //.on("click", clickPath)
             .on("mouseout", outpath)
 */
-        if (document.location.href.indexOf('visualizing.org') > -1)
-            d3.csv("/sites/default/files/data_set/admin/sprint_major-contract-awards-2013.csv", request);
-        else
 			d3.csv(fy + '.csv', request);            
     });
 
