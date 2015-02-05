@@ -57,18 +57,6 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="2007.csv" />
-    <Content Include="2007.json" />
-    <Content Include="2008.csv" />
-    <Content Include="2008.json" />
-    <Content Include="2009.csv" />
-    <Content Include="2009.json" />
-    <Content Include="2010.csv" />
-    <Content Include="2010.json" />
-    <Content Include="2011.csv" />
-    <Content Include="2011.json" />
-    <Content Include="2012.csv" />
-    <Content Include="2012.json" />
     <Content Include="2013.csv" />
     <Content Include="2013.json" />
     <Content Include="sprint_major-contract-awards-2013.csv" />
