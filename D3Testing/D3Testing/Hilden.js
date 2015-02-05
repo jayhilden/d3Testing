@@ -145,7 +145,7 @@ d.csv is similar to PHP's Explode method
             method: d['Procurement Method'],
             type: d['Procurement Type']
         };
-        d.contract = {
+        d.contract = {.
             desc: d['Contract Description'],
             date: Date.parse(d['Contract Signing Date'])
         };
