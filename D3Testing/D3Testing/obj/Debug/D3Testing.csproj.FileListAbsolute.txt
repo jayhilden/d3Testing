@@ -1,0 +1,6 @@
+C:\_GIT\d3Testing\D3Testing\D3Testing\bin\D3Testing.dll.config
+C:\_GIT\d3Testing\D3Testing\D3Testing\bin\D3Testing.dll
+C:\_GIT\d3Testing\D3Testing\D3Testing\bin\D3Testing.pdb
+C:\_GIT\d3Testing\D3Testing\D3Testing\obj\Debug\D3Testing.csprojResolveAssemblyReference.cache
+C:\_GIT\d3Testing\D3Testing\D3Testing\obj\Debug\D3Testing.dll
+C:\_GIT\d3Testing\D3Testing\D3Testing\obj\Debug\D3Testing.pdb
