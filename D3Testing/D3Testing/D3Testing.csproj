@@ -59,7 +59,6 @@
   <ItemGroup>
     <Content Include="2013.csv" />
     <Content Include="2013.json" />
-    <Content Include="sprint_major-contract-awards-2013.csv" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
