@@ -17,7 +17,7 @@
 
 <script>
     "use strict";
-
+    /*
     (function(window) {
         var lastTime = 0;
         var vendors = ['ms', 'moz', 'webkit', 'o'];
@@ -42,13 +42,13 @@
                 clearTimeout(id);
             };
     })(window);
-
+    */
     $(document).ready(function() {
         InitializeD3WorldMap();
     });
 
     var fsvg;
-
+    var mapDiv;
     function InitializeD3WorldMap() {
         fsvg = d3.select(document.body)
             .append("div")
@@ -65,7 +65,7 @@
                 .append("path")
                 .attr("class", "feature");
 
-            var div = d3.select(document.body).append("div").attr("id", "c");
+            mapDiv = mapDiv || d3.select(document.body).append("div").attr("id", "c");
             var w = document.body.clientWidth;
             var h = document.body.clientHeight;
 
@@ -87,30 +87,7 @@
 
     function DataLoadCallback(error, data) {
         var parsedData = data.map(DataMapper);
-        var pointsToAddToMap = [];
-        var pointsInList = new Object();
-        parsedData.forEach(function (i) {
-            if (!pointsInList[i.From.uniqueID]) {
-                pointsInList[i.From.uniqueID] = 1;
-                pointsToAddToMap.push(i.From);
-            }
-            if (!pointsInList[i.To.uniqueID]) {
-                pointsInList[i.To.uniqueID] = 1;
-                pointsToAddToMap.push(i.To);
-            }
-        });
-
-        var circle = fsvg.selectAll("circle")
-            .data(pointsToAddToMap)
-            .enter()
-            .append("circle")
-            .attr("r", 1)
-            .attr("fill", "#fff")
-            .attr("transform", function (coord) {
-                //debugger;
-                var proj = coord.projection();        
-                return "translate(" + proj + ")";
-                });
+        PlotLocationsOnMap(parsedData);
     }
 
     function DataMapper(dataItem) {
@@ -123,15 +100,36 @@
         return dataItem;
     }
 
+    function PlotLocationsOnMap(data) {
+        var pointsToAddToMap = [];
+        var pointsInList = new Object();
+        data.forEach(function (i) {
+            if (!pointsInList[i.From.uniqueID]) {
+                pointsInList[i.From.uniqueID] = 1;
+                pointsToAddToMap.push(i.From);
+            }
+            if (!pointsInList[i.To.uniqueID]) {
+                pointsInList[i.To.uniqueID] = 1;
+                pointsToAddToMap.push(i.To);
+            }
+        });
+
+        fsvg.selectAll("circle")
+            .data(pointsToAddToMap)
+            .enter()
+            .append("circle")
+            .attr("r", 1)
+            .attr("fill", "#fff")
+            .attr("transform", function (coord) {
+                //debugger;
+                var proj = coord.projection();
+                return "translate(" + proj + ")";
+            });
+    }
 
 
 
-</script>
 
-
-
-@*<script type="text/javascript" src="/Window.js"></script>
-    <script type="text/javascript" src="/Hilden.js"></script>*@
-    
+</script>   
 </body>
 </html>
