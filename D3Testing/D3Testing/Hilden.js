@@ -1,4 +1,5 @@
-﻿(function () {
+﻿"use strict";
+(function () {
     var w,
         h,
         _data,
@@ -145,7 +146,7 @@ d.csv is similar to PHP's Explode method
             method: d['Procurement Method'],
             type: d['Procurement Type']
         };
-        d.contract = {.
+        d.contract = {
             desc: d['Contract Description'],
             date: Date.parse(d['Contract Signing Date'])
         };
@@ -219,12 +220,15 @@ d.csv is similar to PHP's Explode method
             a = data[l];
             var duration = a.movementDays;
             a.size = sizes(duration);
+            /*
             b = clone(a);
             //a.parent = a.supplier;
             //b.parent = b.borrower;
+            _data.push(b);
+            */
             a.eventDate = a.eventDate - stepDate /*/2*/;
             _data.push(a);
-            _data.push(b);
+            
         }
 
         div = div || d3.select(document.body).append("div").attr("id", "c");

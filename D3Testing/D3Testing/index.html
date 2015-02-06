@@ -221,7 +221,7 @@
 
         var _worker,
             _data,
-            nodes,
+            //nodes,
             dateRange,
             selected,
             selectedExt,
@@ -390,12 +390,12 @@
 
             updateLegend( /*d.sha*/);
 
-            _force.nodes(nodes.filter(function(d) {
+            _force.nodes(_data.filter(function(d) {
                     return d.type != typeNode.parent && (d.visible || d.opacity);
                 }) //.sort(sortBySize)
             ).start();
 
-            _forceBase.nodes(nodes.filter(function(d) {
+            _forceBase.nodes(_data.filter(function (d) {
                 if (d.type == typeNode.region) {
                     d.alive = 1;
                     d.opacity = 100;
@@ -531,8 +531,8 @@
         }
 
         function getNodeFromPos(pos) {
-            for (var i = nodes.length - 1; i >= 0; i--) {
-                var d = nodes[i];
+            for (var i = _data.length - 1; i >= 0; i--) {
+                var d = _data[i];
                 if (d.visible && contain(d, pos))
                     return d;
             }
@@ -643,6 +643,7 @@
         }
 
         function initNodes(data) {
+            //return;
             debugger;
             var ns = [],
                 i,
@@ -659,7 +660,9 @@
                 i = data.length;
                 while (--i > -1) {
                     d = data[i];
-                    if (!d) continue;
+                    if (!d) {
+                        continue;
+                    }
                     d.nodes = [];
 
                     n = getBase(d);
@@ -1123,7 +1126,7 @@
 
         // Move d to be adjacent to the cluster node.
         function cluster(alpha) {
-
+            debugger;
             parentHash.forEach(function(k, d) {
                 d.links = 0;
             });
@@ -1305,6 +1308,7 @@
                 : d.value.color;
         }
 
+        /*
         function initLegend() {
             if (!layer)
                 return;
@@ -1349,7 +1353,7 @@
                 .style("font-size", "11px")
                 .attr("transform", "translate(" + [2, 12] + ")");
         }
-
+        */
         function sortLeg(b, a) {
             return d3.ascending(a.value.now.length, b.value.now.length);
         }
@@ -1652,7 +1656,7 @@
 
             links = d3.map({});
             regionLinks = [];
-            nodes = initNodes(_data);
+            //nodes = initNodes(_data);
 
             _force = (_force || d3.layout.force()
                     .stop()
@@ -1661,7 +1665,8 @@
                     .gravity(0)
                     //.charge(function(d) {return -1 * radius(nr(d)); } )
                     .charge(-.5)
-                    .on("tick", tick))
+                    .on("tick", tick)
+                )
                 .nodes([]);
 
             zoomScale = d3.scale.linear()
@@ -1679,7 +1684,7 @@
                     }))
                 .nodes([]);
 
-            initLegend();
+            //initLegend();
 
             stop = false;
             pause = false;
