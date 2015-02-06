@@ -68,6 +68,7 @@
     </None>
     <Content Include="Hilden.js" />
     <Content Include="main.css" />
+    <Content Include="Window.js" />
     <Content Include="world-countries.json" />
   </ItemGroup>
   <ItemGroup>
