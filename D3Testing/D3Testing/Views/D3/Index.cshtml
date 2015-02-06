@@ -5,13 +5,15 @@
     <title>Hilden D3 Map test</title>
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="/main.css" />
+    <link rel="stylesheet" type="text/css" href="/main.css"/>    
 </head>
 <body>
-    <script charset="utf-8" src="//cdnjs.cloudflare.com/ajax/libs/d3/3.3.13/d3.min.js"></script>
-    <script charset="utf-8" src="https://rawgithub.com/artzub/dbsv/master/progressbar.js"></script>
+<script charset="utf-8" src="//cdnjs.cloudflare.com/ajax/libs/d3/3.3.13/d3.min.js"></script>
+<script charset="utf-8" src="/Scripts/D3Helpers.js"></script>
+    
+    @*<script charset="utf-8" src="https://rawgithub.com/artzub/dbsv/master/progressbar.js"></script>
     <script charset="utf-8" src="https://rawgithub.com/artzub/dbsv/master/tooltip.js"></script>
-    <script charset="utf-8" src="https://rawgithub.com/artzub/wbgds/smy/wbc.js"></script>
+    <script charset="utf-8" src="https://rawgithub.com/artzub/wbgds/smy/wbc.js"></script>*@
 
     <div>
         hi jay
@@ -54,13 +56,17 @@
     }
 
     function DataLoadCallback(error, data) {
-        debugger;
-        data.foreach(DataMapper);
-        //var parsedData = data.map(DataMapper);
+        var parsedData = data.map(DataMapper);
     }
 
     function DataMapper(dataItem) {
+        
+        dataItem.From = Coordinate(dataItem.FromLocation.Longitude, dataItem.FromLocation.Latitude);
+        dataItem.To = Coordinate(dataItem.ToLocation.Longitude, dataItem.ToLocation.Latitude);
+        var f1 = dataItem.From.projection();
+        var f2 = dataItem.To.projection();
         debugger;
+        return dataItem;
     }
 
 
