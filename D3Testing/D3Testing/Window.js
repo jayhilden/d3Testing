@@ -257,12 +257,12 @@ var ONE_SECOND = 1000,
 
         updateLegend( /*d.sha*/);
 
-        _force.nodes(_data.filter(function (d) {
+        _force.nodes(nodes.filter(function (d) {
             return d.type != typeNode.parent && (d.visible || d.opacity);
         }) //.sort(sortBySize)
         ).start();
 
-        _forceBase.nodes(_data.filter(function (d) {
+        _forceBase.nodes(nodes.filter(function (d) {
             if (d.type == typeNode.region) {
                 d.alive = 1;
                 d.opacity = 100;
@@ -399,14 +399,17 @@ var ONE_SECOND = 1000,
     }
 
     function getNodeFromPos(pos) {
-        for (var i = _data.length - 1; i >= 0; i--) {
-            var d = _data[i];
+        for (var i = nodes.length - 1; i >= 0; i--) {
+            var d = nodes[i];
             if (d.visible && contain(d, pos))
                 return d;
         }
         return null;
     }
 
+    /*
+    I think that node is a point on the map
+    */
     function node(d, type) {
         var c = type == typeNode.child ? d[cat] : baseColor(d.key),
             ext,
@@ -510,7 +513,6 @@ var ONE_SECOND = 1000,
         return n;
     }
 
-    /*
     function initNodes(data) {
         //return;
         debugger;
@@ -566,7 +568,6 @@ var ONE_SECOND = 1000,
         }
         return ns;
     }
-    */
 
     var tempFileCanvas;
 
@@ -1528,7 +1529,7 @@ var ONE_SECOND = 1000,
 
         links = d3.map({});
         regionLinks = [];
-        //nodes = initNodes(_data);
+        nodes = initNodes(_data);
 
         _force = (_force || d3.layout.force()
                 .stop()
