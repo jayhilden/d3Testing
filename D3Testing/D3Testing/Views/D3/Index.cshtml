@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Hilden D3 Map test</title>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/main.css" />
+</head>
+<body>
+    <script charset="utf-8" src="//cdnjs.cloudflare.com/ajax/libs/d3/3.3.13/d3.min.js"></script>
+    <script charset="utf-8" src="https://rawgithub.com/artzub/dbsv/master/progressbar.js"></script>
+    <script charset="utf-8" src="https://rawgithub.com/artzub/dbsv/master/tooltip.js"></script>
+    <script charset="utf-8" src="https://rawgithub.com/artzub/wbgds/smy/wbc.js"></script>
+
+    <div>
+        hi jay
+    </div>
+<script>
+    "use strict";
+
+    (function(window) {
+        var lastTime = 0;
+        var vendors = ['ms', 'moz', 'webkit', 'o'];
+        for (var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+            window.requestAnimationFrame = window[vendors[x] + 'RequestAnimationFrame'];
+            window.cancelAnimationFrame =
+                window[vendors[x] + 'CancelAnimationFrame'] || window[vendors[x] + 'CancelRequestAnimationFrame'];
+        }
+
+        if (!window.requestAnimationFrame)
+            window.requestAnimationFrame = function(callback, element) {
+                var currTime = new Date().getTime();
+                var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+                var id = window.setTimeout(function() { callback(currTime + timeToCall); },
+                    timeToCall);
+                lastTime = currTime + timeToCall;
+                return id;
+            };
+
+        if (!window.cancelAnimationFrame)
+            window.cancelAnimationFrame = function(id) {
+                clearTimeout(id);
+            };
+    })(window);
+
+    $(document).ready(function () {
+        console.log("ready!");
+        InitializeD3();
+    });
+
+    function InitializeD3() {
+        d3.json("@Url.Action("Data")", DataLoadCallback);
+    }
+
+    function DataLoadCallback(error, data) {
+        debugger;
+        data.foreach(DataMapper);
+        //var parsedData = data.map(DataMapper);
+    }
+
+    function DataMapper(dataItem) {
+        debugger;
+    }
+
+
+
+
+</script>
+
+
+
+@*<script type="text/javascript" src="/Window.js"></script>
+    <script type="text/javascript" src="/Hilden.js"></script>*@
+    
+</body>
+</html>

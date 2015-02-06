@@ -103,27 +103,7 @@
         }
     }
 
-    function initItemHilden(d) {
-        //debugger;
-        d.eventDate = Date.parse(d['Event Date']);
-        d.fromCoord = coord(d['From Longitude'], d['From Latitude']);
-        d.toCoord = coord(d['To Longitude'], d['To Latitude']);
-        d.movementDays = parseInt(d['Duration Of Movement In Days']);
-        //d.value = d.movementDays;//this is so we can do things like min/max calculations
-        //d.valueOf = d.value;//this is so we can do things like min/max calculations
-        d.daysAtDestination = parseInt(d['Days At Destination']);
-        d.fromID = parseInt(d['From Unique ID']);
-        d.toID = parseInt(d['To Unique ID']);
 
-        //var x = d.fromCoord.x;
-        //var y = d.fromCoord.y;
-        //debugger;
-        needPaintCapital.push(d.fromCoord);
-        needPaintCapital.push(d.toCoord);
-
-        //preload(d);
-        return d;
-    }
 
     /*
 d is a row of data from the csv file, pretty cool.
@@ -201,6 +181,28 @@ d.csv is similar to PHP's Explode method
         .selectAll("path.feature");
 
     var circle;
+
+    function initItemHilden(d) {
+        //debugger;
+        d.eventDate = Date.parse(d['Event Date']);
+        d.fromCoord = coord(d['From Longitude'], d['From Latitude']);
+        d.toCoord = coord(d['To Longitude'], d['To Latitude']);
+        d.movementDays = parseInt(d['Duration Of Movement In Days']);
+        //d.value = d.movementDays;//this is so we can do things like min/max calculations
+        //d.valueOf = d.value;//this is so we can do things like min/max calculations
+        d.daysAtDestination = parseInt(d['Days At Destination']);
+        d.fromID = parseInt(d['From Unique ID']);
+        d.toID = parseInt(d['To Unique ID']);
+
+        //var x = d.fromCoord.x;
+        //var y = d.fromCoord.y;
+        //debugger;
+        needPaintCapital.push(d.fromCoord);
+        needPaintCapital.push(d.toCoord);
+
+        //preload(d);
+        return d;
+    }
 
     function request(error, data) {
         var l, a, b;
