@@ -10,6 +10,7 @@ var zoom = d3.behavior.zoom()
 
 function Coordinate(x, y) {
     var c = [x, y];
+    var uniqueID = x * y;
     return {
         x: {
             valueOf: function () {
@@ -25,6 +26,7 @@ function Coordinate(x, y) {
         },
         projection: function () {
             return projection(c);
-        }
+        },
+        uniqueID: uniqueID
     }
 }

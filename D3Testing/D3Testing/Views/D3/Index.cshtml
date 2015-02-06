@@ -43,12 +43,14 @@
             };
     })(window);
 
-    $(document).ready(function () {
-        InitializeD3();
+    $(document).ready(function() {
+        InitializeD3WorldMap();
     });
 
-    function InitializeD3() {
-        var fsvg = d3.select(document.body)
+    var fsvg;
+
+    function InitializeD3WorldMap() {
+        fsvg = d3.select(document.body)
             .append("div")
             .attr("id", "map")
             .append("svg");
@@ -56,18 +58,13 @@
         var feature = fsvg
             .selectAll("path.feature");
 
-        d3.json("/world-countries.json", function (error, collection) {
+        d3.json("/world-countries.json", function(error, collection) {
             feature = feature
                 .data(collection.features)
                 .enter()
                 .append("path")
                 .attr("class", "feature");
 
-            /*            .on("mouseover", overpath)
-                        .on("mousemove", moverpath)
-                    //.on("click", clickPath)
-                        .on("mouseout", outpath)
-            */
             var div = d3.select(document.body).append("div").attr("id", "c");
             var w = document.body.clientWidth;
             var h = document.body.clientHeight;
@@ -84,20 +81,44 @@
 
             console.log('InitializeD3 complete');
         });
-        //d3.json("@Url.Action("Data")", DataLoadCallback);
+        d3.json("@Url.Action("Data")", DataLoadCallback);
 
     }
 
     function DataLoadCallback(error, data) {
         var parsedData = data.map(DataMapper);
+        var pointsToAddToMap = [];
+        var pointsInList = new Object();
+        parsedData.forEach(function (i) {
+            if (!pointsInList[i.From.uniqueID]) {
+                pointsInList[i.From.uniqueID] = 1;
+                pointsToAddToMap.push(i.From);
+            }
+            if (!pointsInList[i.To.uniqueID]) {
+                pointsInList[i.To.uniqueID] = 1;
+                pointsToAddToMap.push(i.To);
+            }
+        });
+
+        var circle = fsvg.selectAll("circle")
+            .data(pointsToAddToMap)
+            .enter()
+            .append("circle")
+            .attr("r", 1)
+            .attr("fill", "#fff")
+            .attr("transform", function (coord) {
+                //debugger;
+                var proj = coord.projection();        
+                return "translate(" + proj + ")";
+                });
     }
 
     function DataMapper(dataItem) {
 
         dataItem.From = Coordinate(dataItem.FromLocation.Longitude, dataItem.FromLocation.Latitude);
         dataItem.To = Coordinate(dataItem.ToLocation.Longitude, dataItem.ToLocation.Latitude);
-        var f1 = dataItem.From.projection();
-        var f2 = dataItem.To.projection();
+        //var f1 = dataItem.From.projection();
+        //var f2 = dataItem.To.projection();
         //debugger;
         return dataItem;
     }
