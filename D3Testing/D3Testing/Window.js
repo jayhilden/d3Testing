@@ -153,12 +153,15 @@ var ONE_SECOND = 1000,
 
 
     function reCalc(d) {
-        if (stop)
+        debugger;
+        if (stop) {
             return;
+        }
 
-        lCom.showMessage(d.supplier.shortName + ' to ' + d.borrower.shortName + ' -> ' + d.project.name);
+        lCom.showMessage('I went from ??? to ???');
+        //lCom.showMessage(d.supplier.shortName + ' to ' + d.borrower.shortName + ' -> ' + d.project.name);
 
-        var l = d.nodes.length,
+        var l = _data.length,
             n,
             a,
             fn;
@@ -294,6 +297,7 @@ var ONE_SECOND = 1000,
             return d.eventDate >= dl && d.eventDate < dr;
         });
 
+        debugger;
         asyncForEach(visTurn, reCalc, ONE_SECOND / (visTurn.length > 1 ? visTurn.length : ONE_SECOND));
 
         vis.pb.step(stepDate).label(shortTimeFormat(dr));

@@ -123,6 +123,8 @@
         //d.value = d.movementDays;//this is so we can do things like min/max calculations
         //d.valueOf = d.value;//this is so we can do things like min/max calculations
         d.daysAtDestination = parseInt(d['Days At Destination']);
+        d.fromID = parseInt(d['From Unique ID']);
+        d.toID = parseInt(d['To Unique ID']);
         return d;
     }
 
@@ -130,6 +132,7 @@
 d is a row of data from the csv file, pretty cool.
 d.csv is similar to PHP's Explode method
 */
+    /*
     function initItem(d) {
         // Convert strings to numbers.
         d.value = d.basevalue = parseInt(d["Total Contract Amount (USD)"].substring(1));
@@ -158,6 +161,7 @@ d.csv is similar to PHP's Explode method
 
         return d;
     }
+    */
 
 
     function clone(d) {
