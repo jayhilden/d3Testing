@@ -181,7 +181,7 @@ d.csv is similar to PHP's Explode method
 
     function ctr(coord) {
         var proj = coord.projection();
-        debugger;
+        //debugger;
         return "translate(" + proj + ")";
     }
 
@@ -276,7 +276,7 @@ d.csv is similar to PHP's Explode method
         imgPreloader.hide();
 
         setting.zoom = zoom;
-        debugger;
+        //debugger;
         vis.runShow(_data, div, w, h, setting);
         btnPause.show();
         btnStop.show();

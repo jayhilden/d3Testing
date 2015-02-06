@@ -16,7 +16,7 @@
 
 
 
-<div id="menu">
+<div id="menu" style="display: none">
     <ul>
         <li>
             <button id="btnRestart" class="btn" style="display: none">↷ Restart</button>
@@ -37,74 +37,78 @@
     </ul>
 </div>
 
-<div id="info">
-    <ul>
-        <li>Options
-            <ul>
-                <li>
-                    <input id="chHisto" type="checkbox" checked="checked">
-                    <label for="chHisto">Show histogram</label>
-                </li>
-                <li>
-                    <input id="chLeg" type="checkbox" checked="checked">
-                    <label for="chLeg">Show legend</label>
-                </li>
-                <li>
-                    <input id="chEdge" type="checkbox">
-                    <label for="chEdge">Show all edges</label>
-                </li>
-                <li>
-                    <input id="chTrack" type="checkbox" checked="checked">
-                    <label for="chTrack">Show tracks</label>
-                </li>
-                <li>
-                    <input id="chTail" type="checkbox" checked="checked">
-                    <label for="chTail">Fading tail</label>
-                </li>
-            </ul>
-        </li>
-        <li>Info
-            <ul>
-                <li>
-                    <strong>WorldBank Contract Awards</strong>
-                    <hr>
-                    <div>
-                        We’re using the World Bank’s Major Contract Awards dataset,<br/>
-                        which serves as a guide on the distribution of major contract<br/>
-                        commitments among the Bank’s member countries.
-						<br/><br/>
-						Version 33 at <a href="http://www.visualizing.org/sprint/global-development-sprint">World Bank Global Development Sprint</a>
-                    </div>
-                </li>
-                <li style="background: rgba(0, 0, 0, .1); border: 1px dotted rgba(0, 0, 0, .3)">
-                    <strong>What's going on</strong>
-                    <ol style="color: #d9d9d9;">
-                        <li>• Each luminous particle is a contract. It moves from supplier to borrower.</li>
-                        <li>• The size of particle depends of contract amount.</li>
-                        <li>• Each node of country gathers contracts which it borrowed.</li>
-                        <li>• Every second is a day.</li>
-                        <li>• The histogram shows the number of contracts per day, separated by a selected criterion.</li>
-                        <li>• The legend shows the number of contracts for all time separated by a selected criterion.</li>
-                    </ol>
-                </li>
-                <li style="background: rgba(0, 0, 0, .2); border: 1px dotted rgba(0, 0, 0, .6)">
-                    <strong>How to use:</strong>
-                    <ol style="color: #d9d9d9;">
-                        <li>• Uses buttons for controlling process visualization.</li>
-                        <li>• Uses select for choosing fiscal year or criteria of colouring.</li>
-                        <li>• Uses mouse wheel for zooming.</li>
-                        <li>• Uses mouse cursor for showing information about focused node.</li>
-                    </ol>
-                </li>
-                <li>
-                    <small>© 2013 Created by <a href="http://artzub.com" title="Artem Zubkov">Artem Zubkov</a> (<a href="https://github.com/artzub/wbgds/tree/smy">GitHub</a>).<br/>
-                    Powered by <a href="http://d3js.org" title="D3js">D3.js</a>. Icons flags — <a href="http://forum.tsgk.com/viewtopic.php?t=4921">Country Code & Territories Flags Pack Icons</a></small>
-                </li>
-            </ul>
-        </li>
-        <li><a href="#" title="Open in a new window" id="fs">fullscreen</a></li>
-    </ul>
-</div>
+    <div id="info" style="display: none">
+        <ul>
+            <li>
+                Options
+                <ul>
+                    <li>
+                        <input id="chHisto" type="checkbox" checked="checked">
+                        <label for="chHisto">Show histogram</label>
+                    </li>
+                    <li>
+                        <input id="chLeg" type="checkbox" checked="checked">
+                        <label for="chLeg">Show legend</label>
+                    </li>
+                    <li>
+                        <input id="chEdge" type="checkbox">
+                        <label for="chEdge">Show all edges</label>
+                    </li>
+                    <li>
+                        <input id="chTrack" type="checkbox" checked="checked">
+                        <label for="chTrack">Show tracks</label>
+                    </li>
+                    <li>
+                        <input id="chTail" type="checkbox" checked="checked">
+                        <label for="chTail">Fading tail</label>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                Info
+                <ul>
+                    <li>
+                        <strong>WorldBank Contract Awards</strong>
+                        <hr>
+                        <div>
+                            We’re using the World Bank’s Major Contract Awards dataset,<br />
+                            which serves as a guide on the distribution of major contract<br />
+                            commitments among the Bank’s member countries.
+                            <br /><br />
+                            Version 33 at <a href="http://www.visualizing.org/sprint/global-development-sprint">World Bank Global Development Sprint</a>
+                        </div>
+                    </li>
+                    <li style="background: rgba(0, 0, 0, .1); border: 1px dotted rgba(0, 0, 0, .3)">
+                        <strong>What's going on</strong>
+                        <ol style="color: #d9d9d9;">
+                            <li>• Each luminous particle is a contract. It moves from supplier to borrower.</li>
+                            <li>• The size of particle depends of contract amount.</li>
+                            <li>• Each node of country gathers contracts which it borrowed.</li>
+                            <li>• Every second is a day.</li>
+                            <li>• The histogram shows the number of contracts per day, separated by a selected criterion.</li>
+                            <li>• The legend shows the number of contracts for all time separated by a selected criterion.</li>
+                        </ol>
+                    </li>
+                    <li style="background: rgba(0, 0, 0, .2); border: 1px dotted rgba(0, 0, 0, .6)">
+                        <strong>How to use:</strong>
+                        <ol style="color: #d9d9d9;">
+                            <li>• Uses buttons for controlling process visualization.</li>
+                            <li>• Uses select for choosing fiscal year or criteria of colouring.</li>
+                            <li>• Uses mouse wheel for zooming.</li>
+                            <li>• Uses mouse cursor for showing information about focused node.</li>
+                        </ol>
+                    </li>
+                    <li>
+                        <small>
+                            © 2013 Created by <a href="http://artzub.com" title="Artem Zubkov">Artem Zubkov</a> (<a href="https://github.com/artzub/wbgds/tree/smy">GitHub</a>).<br />
+                            Powered by <a href="http://d3js.org" title="D3js">D3.js</a>. Icons flags — <a href="http://forum.tsgk.com/viewtopic.php?t=4921">Country Code & Territories Flags Pack Icons</a>
+                        </small>
+                    </li>
+                </ul>
+            </li>
+            <li><a href="#" title="Open in a new window" id="fs">fullscreen</a></li>
+        </ul>
+    </div>
 <script>
 //google analytics was here
 </script>
