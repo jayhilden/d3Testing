@@ -515,7 +515,7 @@ var ONE_SECOND = 1000,
 
     function initNodes(data) {
         //return;
-        debugger;
+        //debugger;
         var ns = [],
             i,
             j,

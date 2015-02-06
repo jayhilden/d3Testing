@@ -235,6 +235,7 @@ d.csv is similar to PHP's Explode method
             _data.push(a);
             
         }
+        debugger;
 
         div = div || d3.select(document.body).append("div").attr("id", "c");
         w = document.body.clientWidth;
@@ -278,7 +279,6 @@ d.csv is similar to PHP's Explode method
         imgPreloader.hide();
 
         setting.zoom = zoom;
-        //debugger;
         vis.runShow(_data, div, w, h, setting);
         btnPause.show();
         btnStop.show();

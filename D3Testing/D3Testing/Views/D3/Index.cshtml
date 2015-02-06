@@ -15,9 +15,6 @@
     <script charset="utf-8" src="https://rawgithub.com/artzub/dbsv/master/tooltip.js"></script>
     <script charset="utf-8" src="https://rawgithub.com/artzub/wbgds/smy/wbc.js"></script>*@
 
-    <div>
-        hi jay
-    </div>
 <script>
     "use strict";
 
@@ -47,12 +44,48 @@
     })(window);
 
     $(document).ready(function () {
-        console.log("ready!");
         InitializeD3();
     });
 
     function InitializeD3() {
-        d3.json("@Url.Action("Data")", DataLoadCallback);
+        var fsvg = d3.select(document.body)
+            .append("div")
+            .attr("id", "map")
+            .append("svg");
+
+        var feature = fsvg
+            .selectAll("path.feature");
+
+        d3.json("/world-countries.json", function (error, collection) {
+            feature = feature
+                .data(collection.features)
+                .enter()
+                .append("path")
+                .attr("class", "feature");
+
+            /*            .on("mouseover", overpath)
+                        .on("mousemove", moverpath)
+                    //.on("click", clickPath)
+                        .on("mouseout", outpath)
+            */
+            var div = d3.select(document.body).append("div").attr("id", "c");
+            var w = document.body.clientWidth;
+            var h = document.body.clientHeight;
+
+            projection
+                .scale(w / 6.5)
+                .translate([w / 2, h / 1.6]);
+
+            zoom.translate(projection.translate())
+                .scale(projection.scale())
+                .scaleExtent([h / 6, h]);
+
+            feature.attr("d", path);
+
+            console.log('InitializeD3 complete');
+        });
+        //d3.json("@Url.Action("Data")", DataLoadCallback);
+
     }
 
     function DataLoadCallback(error, data) {
@@ -60,12 +93,12 @@
     }
 
     function DataMapper(dataItem) {
-        
+
         dataItem.From = Coordinate(dataItem.FromLocation.Longitude, dataItem.FromLocation.Latitude);
         dataItem.To = Coordinate(dataItem.ToLocation.Longitude, dataItem.ToLocation.Latitude);
         var f1 = dataItem.From.projection();
         var f2 = dataItem.To.projection();
-        debugger;
+        //debugger;
         return dataItem;
     }
 
