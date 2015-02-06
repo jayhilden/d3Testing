@@ -82,20 +82,6 @@
     }
 
 
-    function initProject(d) {
-        return projects[d['Project ID']] || (projects[d['Project ID']] = {
-            name: d['Project Name'],
-            id: d['Project ID'],
-            toString: function () {
-                return this.name;
-            }
-        });
-    }
-
-    function value() {
-        return this.basevalue || 0;
-    }
-
     function coord(x, y) {
         var c = [x, y];
         return {
@@ -110,6 +96,9 @@
                     var p = projection(c);
                     return p[1];
                 }
+            },
+            projection: function() {
+                return projection(c);
             }
         }
     }
@@ -117,14 +106,22 @@
     function initItemHilden(d) {
         //debugger;
         d.eventDate = Date.parse(d['Event Date']);
-        d.fromCoord = coord(d['From Latitude'], d['From Longitude']);
-        d.toCoord = coord(d['To Latitude'], d['To Longitude']);
+        d.fromCoord = coord(d['From Longitude'], d['From Latitude']);
+        d.toCoord = coord(d['To Longitude'], d['To Latitude']);
         d.movementDays = parseInt(d['Duration Of Movement In Days']);
         //d.value = d.movementDays;//this is so we can do things like min/max calculations
         //d.valueOf = d.value;//this is so we can do things like min/max calculations
         d.daysAtDestination = parseInt(d['Days At Destination']);
         d.fromID = parseInt(d['From Unique ID']);
         d.toID = parseInt(d['To Unique ID']);
+
+        //var x = d.fromCoord.x;
+        //var y = d.fromCoord.y;
+        //debugger;
+        needPaintCapital.push(d.fromCoord);
+        needPaintCapital.push(d.toCoord);
+
+        //preload(d);
         return d;
     }
 
@@ -182,8 +179,10 @@ d.csv is similar to PHP's Explode method
     var path = d3.geo.path()
         .projection(projection);
 
-    function ctr(d) {
-        return "translate(" + projection([d.longitude, d.latitude]) + ")";
+    function ctr(coord) {
+        var proj = coord.projection();
+        debugger;
+        return "translate(" + proj + ")";
     }
 
     var zoom = d3.behavior.zoom()
@@ -250,6 +249,7 @@ d.csv is similar to PHP's Explode method
         feature.attr("d", path);
 
         fsvg.selectAll("circle").remove();
+        
 
         circle = fsvg.selectAll("circle")
             .data(needPaintCapital)
@@ -276,7 +276,7 @@ d.csv is similar to PHP's Explode method
         imgPreloader.hide();
 
         setting.zoom = zoom;
-
+        debugger;
         vis.runShow(_data, div, w, h, setting);
         btnPause.show();
         btnStop.show();
